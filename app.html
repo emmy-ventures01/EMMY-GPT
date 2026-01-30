@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EmmyGPT Chat</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #121212; /* outside background black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Main container (boxed chat) */
+  .chat-box {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 700px;
+    height: 90%;
+    border: 2px solid #ffffff; /* outer white border */
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #121212;
+  }
+
+  /* Chat header */
+  .chat-header {
+    padding: 20px 25px;
+    font-weight: 900;
+    font-size: 2rem;
+    text-align: left;
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
+  }
+
+  /* Chat container */
+  .chat-container {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.05) 0,
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px,
+      transparent 10px
+    );
+  }
+
+  /* Chat messages */
+  .message {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    word-wrap: break-word;
+    font-size: 1rem;
+  }
+
+  .user {
+    align-self: flex-end;
+    background-color: #1e1e1e;
+    color: #ffffff;
+  }
+
+  .ai {
+    align-self: flex-start;
+    background-color: #3b82f6;
+    color: #ffffff;
+  }
+
+  /* Input area */
+  .input-area {
+    display: flex;
+    padding: 10px 15px;
+    background-color: #1e1e1e;
+    border-top: 1px solid #ffffff;
+  }
+
+  .input-area input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #ffffff;
+    background-color: #121212;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .input-area input:focus {
+    outline: 2px solid #3b82f6;
+    border: 2px solid #3b82f6;
+  }
+
+  .input-area button {
+    margin-left: 10px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .input-area button:hover {
+    background-color: #e5e5e5;
+  }
+
+  /* Scrollbar styling */
+  .chat-container::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chat-container::-webkit-scrollbar-thumb {
+    background-color: #3b82f6;
+    border-radius: 3px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="chat-box">
+  <div class="chat-header">EmmyGPT</div>
+
+  <div class="chat-container" id="chatContainer">
+    <!-- Chat messages appear here -->
+  </div>
+
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Type a message..." />
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
