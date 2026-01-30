@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EmmyGPT Splash</title>
+<style>
+  /* Full screen body */
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  /* Splash image covers full screen */
+  #splash-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fills screen without stretching */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  /* Spinner container */
+  .spinner-container {
+    position: absolute;
+    bottom: 50px; /* slightly above bottom */
+    z-index: 2; /* on top of image */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Small blue spinner */
+  .spinner {
+    width: 15px;
+    height: 15px;
+    border: 3px solid #1e3a8a; /* dark blue border */
+    border-top: 3px solid #3b82f6; /* bright blue top */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+<script>
+  // Redirect to signup.html after 5 seconds
+  setTimeout(() => {
+    window.location.href = "signup.html";
+  }, 5000);
+</script>
+
+</head>
+<body>
+
+  <!-- Splash image full screen -->
+  <img id="splash-img" src="https://i.ibb.co/fdHCPgpp/temp.jpg" alt="EmmyGPT">
+
+  <!-- Spinner on top -->
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+
+</body>
+</html>
