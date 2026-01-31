@@ -3,155 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EmmyGPT Signup</title>
+<title>Create Account - EmmyGPT</title>
+<link rel="stylesheet" href="style.css">
 <style>
   body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #121212; /* dark black background */
+    background-color: #121212;
     color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
   }
 
-  .form-container {
+  .signup-container {
     background-color: #1e1e1e;
     padding: 40px 30px;
+    border: 2px solid #ffffff;
     border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   h2 {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    color: #ffffff;
     font-weight: bold;
+    color: #ffffff;
   }
 
-  /* Inputs */
   input {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 10px;
+    padding: 12px;
     border-radius: 8px;
-    border: 2px solid #ffffff; /* bold white border */
-    background-color: #121212; /* dark background inside input */
+    border: 2px solid #ffffff;
+    background-color: #121212;
     color: #ffffff;
-    font-size: 1rem;
     font-weight: bold;
+    font-size: 1rem;
   }
 
   input:focus {
-    outline: 2px solid #3b82f6; /* subtle blue focus */
+    outline: 2px solid #3b82f6;
     border: 2px solid #3b82f6;
   }
 
-  /* Error messages */
-  .error-msg {
-    color: #f87171; /* red */
-    font-size: 0.85rem;
-    height: 18px;
-    margin-bottom: 10px;
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    display: none;
   }
 
-  /* Create Account Button */
   button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
+    padding: 12px;
     border-radius: 8px;
     border: none;
-    background-color: #3b82f6; /* primary blue */
+    background-color: #3b82f6;
     color: #ffffff;
-    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
   }
 
   button:hover {
-    background-color: #1e3a8a; /* darker blue hover */
+    background-color: #2563eb;
   }
 
-  /* Links */
-  a {
-    display: block;
+  .login-link {
     text-align: center;
-    margin-top: 15px;
+    font-size: 0.9rem;
+  }
+
+  .login-link a {
     color: #3b82f6;
-    font-size: 0.95rem;
     text-decoration: none;
   }
 
-  a:hover {
-    text-decoration: underline;
-  }
 </style>
 </head>
 <body>
 
-<div class="form-container">
-  <h2>Sign Up</h2>
+<div class="signup-container">
+  <h2>Create Account</h2>
 
-  <input type="text" id="username" placeholder="Username" required>
-  <div id="username-error" class="error-msg"></div>
+  <input type="text" id="signupUsername" placeholder="Username" required>
+  <input type="password" id="signupPassword" placeholder="Password" required>
+  <div class="error" id="passwordError">Password must be at least 8 characters.</div>
 
-  <input type="password" id="password" placeholder="Password" required>
-  <div id="password-error" class="error-msg"></div>
+  <button id="createAccountBtn">Create Account</button>
 
-  <button id="signupBtn">Create Account</button>
-
-  <a href="login.html">Already have an account? Login</a>
+  <div class="login-link">
+    Already have an account? <a href="login.html">Login</a>
+  </div>
 </div>
 
 <script>
-  const signupBtn = document.getElementById('signupBtn');
-  const usernameInput = document.getElementById('username');
-  const passwordInput = document.getElementById('password');
-  const usernameError = document.getElementById('username-error');
-  const passwordError = document.getElementById('password-error');
+document.getElementById("createAccountBtn").addEventListener("click", () => {
+  const username = document.getElementById("signupUsername").value.trim();
+  const password = document.getElementById("signupPassword").value.trim();
+  const passwordError = document.getElementById("passwordError");
 
-  signupBtn.addEventListener('click', () => {
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value;
+  // Password validation
+  if(password.length < 8) {
+    passwordError.style.display = "block";
+    return;
+  } else {
+    passwordError.style.display = "none";
+  }
 
-    // Username: uppercase, lowercase, letters, numbers
-    const usernameValid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]+$/.test(username);
+  // Store credentials in localStorage
+  localStorage.setItem("emmy_username", username);
+  localStorage.setItem("emmy_password", password);
 
-    // Password: min 8 chars
-    const passwordValid = password.length >= 8;
-
-    // Clear previous errors
-    usernameError.textContent = "";
-    passwordError.textContent = "";
-
-    let valid = true;
-
-    if (!usernameValid) {
-      usernameError.textContent = "Username must include uppercase, lowercase, and numbers.";
-      valid = false;
-    }
-
-    if (!passwordValid) {
-      passwordError.textContent = "Password must be at least 8 characters.";
-      valid = false;
-    }
-
-    if (!valid) return;
-
-    // Save to localStorage
-    localStorage.setItem('emmy_username', username);
-    localStorage.setItem('emmy_password', password);
-
-    // Redirect to login page
-    window.location.href = "login.html";
-  });
+  // Redirect directly to app.html
+  window.location.href = "app.html";
+});
 </script>
 
 </body>
