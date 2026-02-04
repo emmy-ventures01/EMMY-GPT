@@ -66,7 +66,7 @@ async function handleSend(){
   addMessage(aiResponse,"ai");
 }
 
-// File upload
+// File upload handling
 plusBtn.addEventListener("click", ()=> fileInput.click());
 fileInput.addEventListener("change", async (e)=>{
   if(e.target.files.length===0) return;
@@ -79,7 +79,13 @@ fileInput.addEventListener("change", async (e)=>{
     method:"POST", body:formData
   });
   const data = await res.json();
-  addMessage(data.reply,"ai");
+
+  // If response is an image URL, show clickable link
+  if(data.reply.startsWith("http")){
+    addMessage(`Image processed: ${data.reply}`, "ai");
+  } else {
+    addMessage(data.reply,"ai");
+  }
 });
 
 // Load previous chat
